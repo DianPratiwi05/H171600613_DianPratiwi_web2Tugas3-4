@@ -18,6 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/kategori_artikel', 'KategoriArtikelController@index')->name('kategori_artikel.index');
+Route::get('/kategori_berita', 'KategoriBeritaController@index')->name('kategori_berita.index');
+Route::get('/kategori_galeri', 'KategoriGaleriController@index')->name('kategori_galeri.index');
+Route::get('/kategori_pengumuman', 'KategoriPengumumanController@index')->name('kategori_pengumuman.index');
+
 
 
 Route::get('refresh_captcha', 'HomeController@refreshCaptcha')->name('refresh_captcha');
