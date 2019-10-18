@@ -8,9 +8,11 @@
                 <div class="card-header">Tambah Galeri</div>
 
                 <div class="card-body">
-                    <form method="post" action="{!! route('galeri.store') !!}">
+                    {!! Form::open(['route' => 'galeri.store', 'method' => 'post']) !!}
+                        
                         @include('galeri.form')
-                    </form>
+                    
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
@@ -23,7 +25,7 @@
 
         <script>
                 $(document).ready(function() {
-                 CKEDITOR.replace( 'isi' );
+                 CKEDITOR.replace( 'keterangan' );
 
 
                 });

@@ -12,12 +12,12 @@ class KategoriBeritaController extends Controller
         $KategoriBerita=KategoriBerita::all(); 
 
         return view ('kategori_berita.index',compact('KategoriBerita'));
-        //return view ('kategori_berita.index'->with('data',$KategoriBerita);
+        
     }
 
     public function show($id) {
 
-        //$KategoriBerita=KategoriBerita::where('id',$id)->first();
+        
         $KategoriBerita=KategoriBerita::find($id);
 
         return view ('kategori_berita.show', compact('KategoriBerita'));
@@ -34,5 +34,51 @@ class KategoriBeritaController extends Controller
         KategoriBerita::create($input);
 
         return redirect(route('kategori_berita.index'));
+    }
+
+    public function edit($id){
+          $KategoriBerita=KategoriBerita::find($id);
+
+
+          if (empty($KategoriBerita)) {
+              return redirect(route('kategori_berita.index'));
+        }
+
+        return view('kategori_berita.edit',compact('KategoriBerita'));
+    }
+
+    public function update($id,request $request){
+           $KategoriBerita=KategoriBerita::find($id);
+            $input=$request->all();
+
+
+          if (empty($KategoriBerita)) {
+              return redirect(route('kategori_berita.index'));
+        }
+
+        $KategoriBerita->update($input);
+        return redirect(route('kategori_berita.index'));
+
+    }
+     public function destroy($id){
+        $KategoriBerita=KategoriBerita::find($id);
+
+        if (empty($KategoriBerita)){
+            return redirect(route ('kategori_berita.index'));
+        }
+
+        $KategoriBerita->delete();
+        return redirect(route('kategori_berita.index'));
+    }
+
+    
+    public function trash(){
+        
+        $KategoriBerita=KategoriBerita::onlyTrashed()
+                        ->WhereNotNull('deleted_at')
+                        ->get();
+
+        return view ('kategori_berita.index',compact('KategoriBerita'));
+       
     }
 }

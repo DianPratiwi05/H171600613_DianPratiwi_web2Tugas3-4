@@ -7,12 +7,13 @@
             <div class="card">
                 <div class="card-header">Tambah Pengumuman</div>
 
-                <div class="card-body">
-                    {!! Form::open(['route' => 'pengumuman.store', 'method' => 'post']) !!}
+                <div class="card-body">                   
+                    {!! Form::model($Pengumuman, ['route' => ['pengumuman.update', $Pengumuman->id],'method'=>'patch']) !!}
                         
                         @include('pengumuman.form')
                     
                     {!! Form::close() !!}
+
                 </div>
             </div>
         </div>

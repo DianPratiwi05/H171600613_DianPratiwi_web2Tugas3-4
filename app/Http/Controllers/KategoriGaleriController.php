@@ -12,13 +12,13 @@ class KategoriGaleriController extends Controller
         $KategoriGaleri=KategoriGaleri::all(); 
 
         return view ('kategori_galeri.index',compact('KategoriGaleri'));
-        //return view ('kategori_Galeri.index'->with('data',$KategoriGaleri);
+        
     }
 
     public function show($id) {
 
-        //$KategoriGaleri=KategoriGaleri::where('id',$id)->first();
         $KategoriGaleri=KategoriGaleri::find($id);
+       
 
         return view ('kategori_galeri.show', compact('KategoriGaleri'));
         
@@ -34,5 +34,50 @@ class KategoriGaleriController extends Controller
         KategoriGaleri::create($input);
 
         return redirect(route('kategori_galeri.index'));
+    }
+
+    public function edit($id){
+          $KategoriGaleri=KategoriGaleri::find($id);
+
+
+          if (empty($KategoriGaleri)) {
+              return redirect(route('kategori_galeri.index'));
+        }
+
+        return view('kategori_galeri.edit',compact('KategoriGaleri'));
+    }
+
+   public function update($id,request $request){
+           $KategoriGaleri=KategoriGaleri::find($id);
+            $input=$request->all();
+
+
+          if (empty($KategoriGaleri)) {
+              return redirect(route('kategori_galeri.index'));
+        }
+
+        $KategoriGaleri->update($input);
+        return redirect(route('kategori_galeri.index'));
+
+    }
+     public function destroy($id){
+        $KategoriGaleri=KategoriGaleri::find($id);
+
+        if (empty($KategoriGaleri)){
+            return redirect(route ('kategori_galeri.index'));
+        }
+
+        $KategoriGaleri->delete();
+        return redirect(route('kategori_galeri.index'));
+    }
+
+     public function trash(){
+        
+        $KategoriGaleri=KategoriGaleri::onlyTrashed()
+                        ->WhereNotNull('deleted_at')
+                        ->get();
+
+        return view ('kategori_galeri.index',compact('KategoriGaleri'));
+        
     }
 }

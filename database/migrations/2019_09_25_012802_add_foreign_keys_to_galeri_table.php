@@ -14,7 +14,7 @@ class AddForeignKeysToGaleriTable extends Migration {
 	{
 		Schema::table('galeri', function(Blueprint $table)
 		{
-			$table->foreign('kategori_galeri_id', 'fk_galeri_kategori_berita1')->references('id')->on('kategori_berita')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('kategori_galeri_id', 'fk_galeri_kategori_galeri')->references('id')->on('kategori_galeri')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('users_id', 'fk_galeri_users000')->references('id')->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
@@ -29,7 +29,7 @@ class AddForeignKeysToGaleriTable extends Migration {
 	{
 		Schema::table('galeri', function(Blueprint $table)
 		{
-			$table->dropForeign('fk_berita_kategori_berita1');
+			$table->dropForeign('fk_galeri_kategori_galeri');
 			$table->dropForeign('fk_kategori_users000');
 		});
 	}
